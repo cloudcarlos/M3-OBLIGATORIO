@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <title>Title</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body class="p-3">
+    <header>
+        <div id="appname" class="flex text-center">
+            <h1>PRESUPUESTO APP</h1>
+        </div>
+    </header>
+    <main>
+        <div class="d-flex w-100 h-100 m-0 p-5">
+            <div id="panel-ingresos" class="d-block w-50 h-100 mx-5">
+                <div id="ingreso-presupuesto" class="h-50 my-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="float-start mx-2" style="width:30px;" src="./assets/img/billete-de-banco.png" alt="presupuesto-img">
+                            <h4 class="card-title">Presupuesto</h4>
+                            <p class="card-text">
+                                <form id="presupuesto-form" action="#">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Monto</span>
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" name="presupuesto-monto" id="presupuesto-monto" class="form-control" placeholder="0" required>
+                                        <span class="input-group-text"> <button type="submit" class="btn btn-primary form-submit" id="presupuesto-boton">Ingresar</button></span> 
+                                    </div>
+                                </form>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div id="ingreso-gastos" class="h-50 my-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="float-start mx-2" style="width:30px;" src="./assets/img/factura.png" alt="gastos-img">
+                            <h4 class="card-title">Gastos</h4>
+                            <p class="card-text">
+                                <form id="gastos-form" action="#">
+                                    <div class="input-group mb-3 d-none">
+                                        <span class="input-group-text">ID</span>
+                                        <input type="text" name="gastos-id" id="gastos-id" class="form-control" disabled>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Nombre del gasto</span>
+                                        <input type="text" name="gastos-nombre" id="gastos-nombre" class="form-control" placeholder="ej. Aceite 1Lt" required>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Monto</span>
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" name="gastos-monto" id="gastos-monto" class="form-control" placeholder="ej. $3500" required>
+                                    </div>
+                                    <div id="boton-gastos" class="input-group mt-5">
+                                        <span class="input-group-text">
+                                            <button type="submit" class="btn btn-primary form-submit" id="gastos-guardar">Agregar producto</button>
+                                        </span>
+                                        <span class="input-group-text d-none">
+                                            <button type="submit" class="btn btn-primary form-submit" id="gastos-actualizar" disabled>Guardar cambios</button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="panel-tablas" class="d-block w-50 h-100 mx-5 pt-2 end-0">
+                <div id="tabla-totales" class="h-50">
+                    <div class="table-responsive">
+                        <table class="table table-primary">
+                          <thead>
+                              <tr>
+                                <th scope="col">Presupuesto</th>
+                                <th scope="col">Total de gastos</th>
+                                <th scope="col">Saldo total</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr class="">
+                              <td id="presupuesto-total"></td>
+                              <td id="gastos-total"></td>
+                              <td id="diferencia-total"></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="tabla-subtotales" class="h-50">
+                    <div class="table-responsive">
+                      <table class="table table-primary">
+                        <thead>
+                          <tr>
+                            <th scope="col">Compras</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col">Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody id="compras-listado">
+                            <tr id="gasto-id">
+                                <td id="compras-nombre"></td>
+                                <td id="compras-monto"></td>
+                                <td id="compras-acciones"></td>
+                            </tr>  
+                        </tbody>
+                      </table>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+    <script src="./assets/js/Presupuesto.js"></script>
+    <script src="./assets/js/main.js"></script>
+  </body>
+</html>
