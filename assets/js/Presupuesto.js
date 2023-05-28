@@ -68,7 +68,7 @@ class Presupuesto{
         return null;  
     }
     eliminarGasto(id) {
-        const indiceGasto = this.buscarGasto(id);
+        let indiceGasto = this.buscarGasto(id);
         if (indiceGasto.id !== -1) {
             this.listaGastos.splice(indiceGasto, 1);
             return indiceGasto;

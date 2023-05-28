@@ -87,15 +87,41 @@ window.onload = () =>{
             botonEditar.textContent = "Editar";
             botonEditar.classList.add("btn", "btn-success", "btn-sm","m-1","boton-editar");
             //botonEditar.addeventListener
-            botonEditar.addEventListener("click", (event) => {
-                event.preventDefault();
-                const tr = event.target.closest("tr");
-                let id = parseInt(tr.getAttribute("id") );
+
+            const manejadorEditar =(evento)=>{
+                evento.preventDefault();
+                let row = evento.target.closest("tr");
+                let id = parseInt(row.id)
                 let gastoEncontrado = nuevoPresupuesto.buscarGasto(id)
                 if(gastoEncontrado == null){
                     return console.log("buscarGasto()::: NO ENCONTRADO")
                 }
+                
                 console.log("buscarGasto()::: " + JSON.stringify(gastoEncontrado));
+                
+                let nombre = gastoEncontrado.nombre;
+                let monto = gastoEncontrado.monto;
+                gastosId.value = id;
+                gastosNombre.value = nombre;
+                gastosMonto.value = monto;
+                mostrarOcultarActualizar(event);
+                return console.log('botonEditar::: OK');
+            }
+            
+            botonEditar.addEventListener("click",evento => manejadorEditar(evento) )
+
+            /*
+            botonEditar.addEventListener("click", (event) => {
+                event.preventDefault();
+                const tr = event.target.closest("tr");
+                let id = parseInt(tr.getAttribute("id") );
+                let gastoEncontrado = nuevoPresupuesto.buscarGasto(id)                
+                if(gastoEncontrado == null){
+                    return console.log("buscarGasto()::: NO ENCONTRADO")
+                }
+
+                console.log("buscarGasto()::: " + JSON.stringify(gastoEncontrado));
+                
                 let nombre = gastoEncontrado.nombre;
                 let monto = gastoEncontrado.monto;
                 gastosId.value = id;
@@ -104,6 +130,8 @@ window.onload = () =>{
                 mostrarOcultarActualizar(event);
                 return console.log('botonEditar::: OK');
             });
+            */
+
             // end botonEditar
             //agrego el botonEditar a tdAcciones
             tdAcciones.appendChild(botonEditar);
