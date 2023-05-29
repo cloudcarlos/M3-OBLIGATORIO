@@ -99,11 +99,16 @@
                           </tr>
                         </thead>
                         <tbody id="compras-listado">
-                            <tr id="gasto-id">
-                                <td id="compras-nombre"></td>
-                                <td id="compras-monto"></td>
-                                <td id="compras-acciones"></td>
-                            </tr>  
+                            <template id="template-gasto">
+                                <tr id="">
+                                    <td class="td-nombre"></td>
+                                    <td class="td-monto"></td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm m-1 boton-borrar">Borrar</button>
+                                        <button class="btn btn-success btn-sm m-1 boton-editar">Editar</button>
+                                    </td>
+                                </tr>
+                            </template>
                         </tbody>
                       </table>
                     </div>
