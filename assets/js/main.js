@@ -23,26 +23,22 @@ window.onload = () =>{
     // Tabla Gastos 
     const gastosTabla = document.getElementById("compras-listado");
 
-    const renderizarTotales =()=> {
-        const totalSaldos = presupuesto.calcularTotalSaldos();
-        const totalGastos = presupuesto.calcularTotalGastos();
-        const diferencia = presupuesto.calcularDiferencia();
-        saldosTotalTabla.textContent = totalSaldos 
-        gastosTotalTabla.textContent = totalGastos;
-        diferenciaTotalTabla.textContent = diferencia
-        return console.log("renderizarTotales()::: OK")
-    };
-
-    //contenedorBotones evalua si el click viene del botonBorrar o editar
+    //gastosTabla.addEventListener() evalua si el click viene del boton Borrar o Editar
+    /**
+     * si viene de boton-borrar
+     * -
+     * 
+     * 
+     */
     gastosTabla.addEventListener("click", event => {
         if (event.target.classList.contains("boton-borrar")) {
             event.preventDefault();
             const tr = event.target.closest("tr");
-            const id = tr.id;
-
-            let respuesta = presupuesto.borrarGasto(id);
+            const idParse = parseInt(tr.id.split("-")[1]);
+            console.log("id de row Borrar::: " + idParse)
+            let respuesta = presupuesto.borrarGasto(idParse);
             if (respuesta) {
-                tr.remove();
+                tr.parentNode.removeChild(tr);
                 renderizarTotales();
                 return console.log("botonBorrar::: OK");
             } else {
@@ -50,27 +46,30 @@ window.onload = () =>{
             }
         } else if (event.target.classList.contains("boton-editar")) {
             event.preventDefault();
+            console.log(event.target)
             const tr = event.target.closest("tr");
-            const id = tr.id;
-            console.log(id)
-            let gastoEncontrado = presupuesto.gastos.has(id);
-            console.log(gastoEncontrado)
+            const id = tr.id
+            const idParse = parseInt(tr.id.split("-")[1]);
+            console.log("id de row Editar::: " + idParse)
+            limpiarInput()
+            if( presupuesto.gastos.has(idParse));{
+                console.log("botonEditar::: ID encontrado")
                 try{    
-                    let nombre = gastoEncontrado.nombre;
-                    let monto = gastoEncontrado.monto;
-                    limpiarInput()
+                    let gasto = presupuesto.buscarGasto(idParse)
                     gastosId.value = id;
-                    gastosNombre.value = nombre;
-                    gastosMonto.value = monto;
+                    console.log("gastoEncontrado:: " + gasto)
+                    gastosNombre.value = gasto[1].nombre;
+                    gastosMonto.value = gasto[1].monto;
                     manejadorGuardarActualizar(event);
                     return console.log("botonEditar::: OK");
-                }catch(event){
-                    return console.error(error);
+                }catch(error){
+                    return console.log(error);
                 }
+            }
             
         }
     });
-
+    //saldosGuardar 
     saldosGuardar.addEventListener("click", event => {
         event.preventDefault();
         let monto = saldosMonto.value
@@ -114,14 +113,20 @@ window.onload = () =>{
     gastosActualizar.addEventListener("click", event =>{
         event.preventDefault();
         let id = gastosId.value
-        let nombre = gastosNombre.value
+        let idParse = parseInt(id.split("-")[1])
+        let nombre = String(gastosNombre.value)
         let monto = parseInt(gastosMonto.value)
+        console.log(`id: ${idParse} nombre: ${nombre} monto: ${monto}`)
         if( isNaN(monto) || nombre.trim().length === 0) {
             return console.log('Nombre y/o Monto en Gasto con valor erroneo');
         }
-        let gastoActualizado = presupuesto.actualizarGasto(id,nombre,monto);
+        let gastoActualizado = presupuesto.actualizarGasto(idParse,nombre,monto);
+        console.log("gasto actualizado::: " + gastoActualizado)
         if (gastoActualizado){
             try{
+                let tr = document.querySelector("#"+id);
+                console.log(tr)
+                tr.parentNode.removeChild(tr);
                 renderizarTotales();
                 renderizarGasto(gastoActualizado);
                 limpiarInput();
@@ -131,17 +136,27 @@ window.onload = () =>{
                 return console.error(error);
             }
         }    
-    })
+    });
+
+    const renderizarTotales =()=> {
+        const totalSaldos = presupuesto.calcularTotalSaldos();
+        const totalGastos = presupuesto.calcularTotalGastos();
+        const diferencia = presupuesto.calcularDiferencia();
+        saldosTotalTabla.textContent = totalSaldos 
+        gastosTotalTabla.textContent = totalGastos;
+        diferenciaTotalTabla.textContent = diferencia
+        return console.log("renderizarTotales()::: OK")
+    };
 
     const renderizarGasto =(gasto)=> {
+        console.log("renderizarGasto():::  "+gasto)
+        const id = gasto[0]
+        const nombre = gasto[1].nombre
+        const monto = gasto[1].monto
 
-        const id = gasto.id
-        const nombre = gasto.nombre
-        const monto = gasto.monto
-        
         //row con id 
         const tr = document.createElement("tr")
-        tr.setAttribute('id', id);
+        tr.setAttribute('id', `id-`+id);
         
         //td nombre
         const tdNombre = document.createElement("td");

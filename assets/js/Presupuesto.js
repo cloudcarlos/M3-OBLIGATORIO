@@ -28,11 +28,12 @@ class Presupuesto{
         if (typeof nombre !== 'string' || nombre.trim().length === 0) {
             throw new Error('El nombre del gasto NO PUEDE ESTAR VACIO.');
         }
-        const id = this.contadorId; 
+        const id = this.contadorGastos; 
         const nuevoGasto = { nombre, monto };
         this.gastos.set(id, nuevoGasto);
-        this.contadorId++;
-        return this.gastos.get(id)
+        let gastoARenderizar = this.buscarGasto(id)
+        this.contadorGastos++;
+        return gastoARenderizar
     }
     
     calcularTotalSaldos() {
@@ -53,17 +54,32 @@ class Presupuesto{
         const totalSaldos = this.calcularTotalSaldos();
         const totalGastos = this.calcularTotalGastos();
         return totalSaldos - totalGastos;
-    } 
-    actualizarGasto(id, nombre, nuevoMonto) {
-        if (this.gastos.has(id)) {
-            const gastoExistente = this.gastos.get(id);
-            gastoExistente.nombre = nombre;
-            gastoExistente.monto = nuevoMonto;
-            return gastoExistente;
+    }
+    buscarGasto(id){
+        for (let [clave,valor] of this.gastos.entries()){
+            if (clave == id) {
+                console.log(`buscarGasto => clave ${clave} // valor ${valor}`)
+                return [clave,valor]
+            }
         }
-        return null
-    }   
+        return false
+    }
+    actualizarGasto(id, nombre, nuevoMonto) {
+        console.log("actualizarGasto ID: "+ id)
+        id = parseInt(id);
+        console.log(this.gastos) 
+
+        if (!this.gastos.has(id)) {
+            throw new Error('El gasto con el ID especificado no existe.');
+        }
+        const gastoExistente = this.gastos.get(id);
+        gastoExistente.nombre = nombre;
+        gastoExistente.monto = nuevoMonto;
+        let gastoARenderizar = this.buscarGasto(id)
+        return gastoARenderizar;
+    }
     borrarGasto(id) {
+        console.log("borrarGasto ID: "+id)
         if (!this.gastos.has(id)) {
             throw new Error('El gasto con el ID especificado no existe.');
         }

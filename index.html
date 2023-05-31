@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <title>Title</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <title>Modulo 3 Obligatorio</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
 <body class="p-3">
     <header>
-        <div id="appname" class="flex text-center">
+        <div class="flex text-center">
             <h1>PRESUPUESTO APP</h1>
         </div>
     </header>
@@ -19,7 +19,7 @@
                     <div class="card">
                         <div class="card-body">
                             <img class="float-start mx-2" style="width:30px;" src="./assets/img/billete-de-banco.png" alt="presupuesto-img">
-                            <h4 class="card-title">Presupuesto</h4>
+                            <h4 class="card-title">Saldos</h4>
                             <p class="card-text">
                                 <form id="presupuesto-form" action="#">
                                     <div class="input-group mb-3">
@@ -71,35 +71,35 @@
                 <div id="tabla-totales" class="h-50">
                     <div class="table-responsive">
                         <table class="table table-primary">
-                          <thead>
-                              <tr>
-                                <th scope="col">Presupuesto</th>
-                                <th scope="col">Total de gastos</th>
-                                <th scope="col">Saldo total</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr class="">
-                              <td id="presupuesto-total"></td>
-                              <td id="gastos-total"></td>
-                              <td id="diferencia-total"></td>
-                            </tr>
-                          </tbody>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Total de saldo</th>
+                                    <th scope="col">Total de gastos</th>
+                                    <th scope="col">Saldo total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="">
+                                <td id="presupuesto-total"></td>
+                                <td id="gastos-total"></td>
+                                <td id="diferencia-total"></td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
                 <div id="tabla-subtotales" class="h-50">
                     <div class="table-responsive">
-                      <table class="table table-primary">
-                        <thead>
-                          <tr>
-                            <th scope="col">Compras</th>
-                            <th scope="col">Valor</th>
-                            <th scope="col">Acciones</th>
-                          </tr>
-                        </thead>
-                        <tbody id="compras-listado">
-                            <template id="template-gasto">
+                        <table class="table table-primary">
+                            <thead>
+                            <tr>
+                                <th scope="col">Compras</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                            </thead>
+                            <tbody id="compras-listado">
+                                <template>
                                 <tr id="">
                                     <td class="td-nombre"></td>
                                     <td class="td-monto"></td>
@@ -108,12 +108,10 @@
                                         <button class="btn btn-success btn-sm m-1 boton-editar">Editar</button>
                                     </td>
                                 </tr>
-                            </template>
-                        </tbody>
-                      </table>
+                                </template>
+                            </tbody>
+                        </table>
                     </div>
-                    
-                    
                 </div>
             </div>
         </div>
