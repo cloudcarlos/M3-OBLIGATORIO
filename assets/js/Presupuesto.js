@@ -58,16 +58,14 @@ class Presupuesto{
     buscarGasto(id){
         for (let [clave,valor] of this.gastos.entries()){
             if (clave == id) {
-                console.log(`buscarGasto => clave ${clave} // valor ${valor}`)
                 return [clave,valor]
             }
         }
         return false
     }
     actualizarGasto(id, nombre, nuevoMonto) {
-        console.log("actualizarGasto ID: "+ id)
         id = parseInt(id);
-        console.log(this.gastos) 
+        //console.log(this.gastos) 
 
         if (!this.gastos.has(id)) {
             throw new Error('El gasto con el ID especificado no existe.');

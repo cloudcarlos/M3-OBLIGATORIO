@@ -35,33 +35,32 @@ window.onload = () =>{
             event.preventDefault();
             const tr = event.target.closest("tr");
             const idParse = parseInt(tr.id.split("-")[1]);
-            console.log("id de row Borrar::: " + idParse)
+            //console.log("id de row Borrar::: " + idParse)
             let respuesta = presupuesto.borrarGasto(idParse);
             if (respuesta) {
                 tr.parentNode.removeChild(tr);
                 renderizarTotales();
-                return console.log("botonBorrar::: OK");
+                return //console.log("botonBorrar::: OK");
             } else {
-                return console.log("borrarBorrar()::: ERROR");
+                return //console.log("borrarBorrar()::: ERROR");
             }
         } else if (event.target.classList.contains("boton-editar")) {
             event.preventDefault();
-            console.log(event.target)
             const tr = event.target.closest("tr");
             const id = tr.id
             const idParse = parseInt(tr.id.split("-")[1]);
-            console.log("id de row Editar::: " + idParse)
+            //console.log("id de row Editar::: " + idParse)
             limpiarInput()
             if( presupuesto.gastos.has(idParse));{
-                console.log("botonEditar::: ID encontrado")
+                //console.log("botonEditar::: ID encontrado")
                 try{    
                     let gasto = presupuesto.buscarGasto(idParse)
                     gastosId.value = id;
-                    console.log("gastoEncontrado:: " + gasto)
+                    //console.log("gastoEncontrado:: " + gasto)
                     gastosNombre.value = gasto[1].nombre;
                     gastosMonto.value = gasto[1].monto;
                     manejadorGuardarActualizar(event);
-                    return console.log("botonEditar::: OK");
+                    return //console.log("botonEditar::: OK");
                 }catch(error){
                     return console.log(error);
                 }
@@ -75,14 +74,14 @@ window.onload = () =>{
         let monto = saldosMonto.value
         monto = parseInt(monto)
         if( isNaN(monto) ){
-            return console.log('El monto del saldo debe ser mayor a 0.');
+            return alert('El monto del saldo debe ser mayor a 0.');
         }
         let montoAgregado = presupuesto.agregarSaldos(monto);
         if (montoAgregado) {
             try{
                 renderizarTotales();
                 limpiarInput();
-                return console.log(`saldoGuardar()::: OK`)
+                return //console.log(`saldoGuardar()::: OK`)
             } catch(error){
                 return console.error(error)
             }
@@ -94,16 +93,15 @@ window.onload = () =>{
         let nombre = gastosNombre.value
         let monto = parseInt(gastosMonto.value)
         if( isNaN(monto) || nombre.trim().length === 0) {
-            return console.log('Nombre y/o Monto en Gasto con valor erroneo');
+            return alert('Nombre y/o Monto en Gasto con valor erroneo');
         }
         gastoAgregado = presupuesto.agregarGasto(nombre,monto);
-        console.log(gastoAgregado)
         if (gastoAgregado){
             try{
                 renderizarTotales();
                 renderizarGasto(gastoAgregado);
                 limpiarInput()
-                return console.log(`gastosGuardar::: OK`)
+                return //console.log(`gastosGuardar::: OK`)
             } catch(error){
                 return console.error(error)
             }
@@ -116,22 +114,21 @@ window.onload = () =>{
         let idParse = parseInt(id.split("-")[1])
         let nombre = String(gastosNombre.value)
         let monto = parseInt(gastosMonto.value)
-        console.log(`id: ${idParse} nombre: ${nombre} monto: ${monto}`)
+        //console.log(`id: ${idParse} nombre: ${nombre} monto: ${monto}`)
         if( isNaN(monto) || nombre.trim().length === 0) {
-            return console.log('Nombre y/o Monto en Gasto con valor erroneo');
+            return alert('Nombre y/o Monto en Gasto con valor erroneo');
         }
         let gastoActualizado = presupuesto.actualizarGasto(idParse,nombre,monto);
-        console.log("gasto actualizado::: " + gastoActualizado)
+        //console.log("gasto actualizado::: " + gastoActualizado)
         if (gastoActualizado){
             try{
                 let tr = document.querySelector("#"+id);
-                console.log(tr)
                 tr.parentNode.removeChild(tr);
                 renderizarTotales();
                 renderizarGasto(gastoActualizado);
                 limpiarInput();
                 manejadorGuardarActualizar(event)
-                return console.log(`gastosActualizar::: OK`)
+                return //console.log(`gastosActualizar::: OK`)
             } catch(error){
                 return console.error(error);
             }
@@ -145,11 +142,10 @@ window.onload = () =>{
         saldosTotalTabla.textContent = totalSaldos 
         gastosTotalTabla.textContent = totalGastos;
         diferenciaTotalTabla.textContent = diferencia
-        return console.log("renderizarTotales()::: OK")
+        return //console.log("renderizarTotales()::: OK")
     };
 
     const renderizarGasto =(gasto)=> {
-        console.log("renderizarGasto():::  "+gasto)
         const id = gasto[0]
         const nombre = gasto[1].nombre
         const monto = gasto[1].monto
@@ -191,7 +187,7 @@ window.onload = () =>{
 
         tr.appendChild(tdAcciones)
         gastosTabla.appendChild(tr)
-        console.log("renderizarGasto()::: OK")
+        return //console.log("renderizarGasto()::: OK")
 
     };
 
@@ -200,7 +196,7 @@ window.onload = () =>{
         input.forEach( (elemento) => {
             elemento.value = "";
         })
-        return console.log("limpiarInput()::: OK")
+        return //console.log("limpiarInput()::: OK")
     };
 
     const manejadorGuardarActualizar =(event)=> {
